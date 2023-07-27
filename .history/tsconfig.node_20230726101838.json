@@ -1,0 +1,19 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "cypress.config.*",
+    "nightwatch.conf.*",
+    "playwright.config.*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "types": ["node"]
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "lib": ["esnext", "dom"] // Ví dụ: Sử dụng "esnext" và "dom"
+  }
+}
