@@ -17,5 +17,9 @@ export default {
 </script>
 <style lang="" scoped>
     
+<<<<<<< HEAD
 </style>
 >>>>>>> parent of f178555 (Revert "sua file login3")
+=======
+</style>
+>>>>>>> parent of e436d3f (update 2)
