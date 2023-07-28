@@ -1,14 +1,32 @@
+<script setup lang="ts">
+import axios from 'axios';
+import { RouterLink, RouterView } from 'vue-router'
+// import HelloWorld from './components/HelloWorld.vue'
+import login from './components/login.vue'
+import login2 from './components/login2.vue'
+
+</script>
+
 <template>
-  <div>
-    <router-link to="/home">Trang chủ</router-link>
-    <router-link to="/login">Đăng nhập</router-link>
-    <router-link to="/register">Đăng ký</router-link>
-    <router-view></router-view>
-  </div>
+  <!-- <login/> -->
+  <login2/>
+  <!-- <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper"> -->
+      <!-- <HelloWorld msg="You did it!" /> -->
+     
+
+      <!-- <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </nav>
+    </div>
+  </header>
+  
+  <RouterView /> -->
 </template>
 
-<script>
-export default {
-  name: 'App',
-};
-</script>
+<style scoped>
+
+</style>
