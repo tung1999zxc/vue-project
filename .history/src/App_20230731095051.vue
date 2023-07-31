@@ -8,7 +8,6 @@ import axios from 'axios';
 import { RouterLink, RouterView } from 'vue-router'
 import Menu from './components/Menu.vue'
 
-
 //import login from './components/login.vue'
 
 // export default {

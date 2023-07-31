@@ -30,6 +30,7 @@
     },
     methods: {
       login() {
+        debugger
         // Lấy thông tin đăng nhập từ data
         const username = this.username;
         const password = this.password;
