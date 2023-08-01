@@ -1,0 +1,86 @@
+<template>
+    <div class="menu bg-success">
+      <ul class="">
+        <li><router-link to="/">Home</router-link></li>
+        
+        <li v-if="!isAuthenticated" class="ml-auto btn border-primary bg-primary" style="margin-left : 700px;">
+         <router-link to="/Login">Đăng nhập</router-link>
+         </li>
+        <li v-else class="ml-auto btn border-primary bg-primary" style="margin-left : 700px;">
+         <a @click="logoutUser">Đăng xuất</a>
+         </li>
+        
+        <li><router-link to="/Regis">Đăng Kí</router-link></li>
+      </ul>
+    </div>
+  </template>
+  
+  <script>
+  import 'bootstrap/dist/css/bootstrap.css';
+  export default {
+    data() {
+        return {
+        //    token: localStorage.getItem('token'),
+           isAuthenticated: false,
+        }
+    },
+    created() {
+    this.isAuthenticated = this.checkAuthentication();
+  },
+    methods: {
+
+        checkAuthentication() {
+      // Kiểm tra xem mã thông báo JWT đã tồn tại trong localStorage hay không
+      const token = localStorage.getItem('token');
+      // Hoặc bạn có thể sử dụng Vuex nếu bạn đang lưu trữ mã thông báo JWT trong Vuex
+      // const token = this.$store.state.token;
+
+      // Nếu tồn tại mã thông báo JWT và không hết hạn, xác định rằng người dùng đã đăng nhập
+      if (token) {
+        // Phân tích mã thông báo JWT để xem liệu nó còn hợp lệ hay đã hết hạn
+        // Nếu mã thông báo hợp lệ, người dùng đã đăng nhập
+        return true;
+      } else {
+        // Nếu không tồn tại mã thông báo JWT hoặc mã thông báo đã hết hạn, người dùng chưa đăng nhập
+        return false;
+      }
+    },
+        logoutUser(){
+      // Xóa mã thông báo JWT khỏi localStorage khi đăng xuất
+      localStorage.removeItem('token');
+      // Hoặc đặt lại giá trị isAuthenticated về false khi đăng xuất
+      this.isAuthenticated = false;
+      alert('đăng xuất thành  công');
+     
+      
+
+    },
+    },
+   
+  };
+  </script>
+  
+  <style scoped>
+  .menu {
+    background-color: #f0f0f0;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    margin-left: 60px;
+    display: flex;
+  }
+  
+  li {
+    padding: 10px 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+  }
+  </style>
+  
