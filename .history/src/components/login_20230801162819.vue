@@ -40,9 +40,15 @@ import { mapActions, mapGetters , mapMutations} from 'vuex';
       ...mapMutations('auth', ['SET_AUTHENTICATED']),
       ...mapActions('auth', ['login', 'logout']), // Map the actions to the component's methods
     handleLogin() {
-      this.login({ username: this.username, password: this.password });
-      this.$router.push('/');
+      // Call the mapped action and pass the email and password variables as parameters
+      this.login({ email: this.email, password: this.password });
     },
+      login() {
+        // Lấy thông tin đăng nhập từ data
+       
+        // Gửi yêu cầu đăng nhập đến server
+      
+      }
     },
   };
   </script>

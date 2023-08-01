@@ -1,5 +1,5 @@
 const state = {
-  isAuthenticated: localStorage.getItem('token'),
+  isAuthenticated: null,
   
   // Các thông tin người dùng khác nếu cần
 };
@@ -15,7 +15,8 @@ const getters = {
     // Các mutations khác nếu cần
   };
   import axios from 'axios';
-  import router from '../router/index'; 
+  import { useRouter } from 'vue-router';
+  import router from '../router'; 
   const actions = {
     login({ commit }, { username, password }) {
     
@@ -26,10 +27,10 @@ const getters = {
     .then(response => {
       const data = response.data;
       localStorage.setItem('token', data.access_token);
-      commit('SET_AUTHENTICATED', localStorage.getItem('token'))
+      commit('SET_AUTHENTICATED', true)
      
       alert('Đăng nhập thành công');
-      
+      this.$router.push('');
       
       
       // console.log(data)  
@@ -48,7 +49,7 @@ const getters = {
        
       logout({ commit }) {
         localStorage.removeItem('token');
-          commit('SET_AUTHENTICATED', localStorage.getItem('token'));
+          commit('SET_AUTHENTICATED', false);
           alert('đăng xuất thành  công');
         },
 

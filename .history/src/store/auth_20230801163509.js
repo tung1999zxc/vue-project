@@ -1,5 +1,5 @@
 const state = {
-  isAuthenticated: localStorage.getItem('token'),
+  isAuthenticated: null,
   
   // Các thông tin người dùng khác nếu cần
 };
@@ -15,10 +15,9 @@ const getters = {
     // Các mutations khác nếu cần
   };
   import axios from 'axios';
-  import router from '../router/index'; 
   const actions = {
     login({ commit }, { username, password }) {
-    
+     
       axios.post('https://api.tranhai.net/api/auth/login', {
       username: username,
       password: password
@@ -26,11 +25,11 @@ const getters = {
     .then(response => {
       const data = response.data;
       localStorage.setItem('token', data.access_token);
-      commit('SET_AUTHENTICATED', localStorage.getItem('token'))
+      this.SET_AUTHENTICATED('true');
      
       alert('Đăng nhập thành công');
       
-      
+      this.$router.push('/')
       
       // console.log(data)  
       // this.token = data.access_token; 
@@ -38,9 +37,7 @@ const getters = {
     .catch(error => {
       // Xử lý lỗi đăng nhập
       console.error(error);
-      
       alert('Đăng nhập thất bại!');
-      
     });
 
         },
@@ -48,7 +45,7 @@ const getters = {
        
       logout({ commit }) {
         localStorage.removeItem('token');
-          commit('SET_AUTHENTICATED', localStorage.getItem('token'));
+          commit('SET_AUTHENTICATED', false);
           alert('đăng xuất thành  công');
         },
 

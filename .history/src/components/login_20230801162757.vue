@@ -13,7 +13,7 @@
               <label for="password">Mật khẩu</label>
               <input v-model="password" type="password" id="password" placeholder="Mật khẩu">
           </div>
-          <button class="login-btn mb-2" @click="handleLogin">Đăng nhập</button> 
+          <button class="login-btn mb-2" @click="login">Đăng nhập</button> 
           <div class="mx-auto"><router-link to="/Regis"><span class="text-primary">Đăng kí tài khoản</span></router-link></div>
        </div>
  
@@ -40,9 +40,15 @@ import { mapActions, mapGetters , mapMutations} from 'vuex';
       ...mapMutations('auth', ['SET_AUTHENTICATED']),
       ...mapActions('auth', ['login', 'logout']), // Map the actions to the component's methods
     handleLogin() {
-      this.login({ username: this.username, password: this.password });
-      this.$router.push('/');
+      // Call the mapped action and pass the email and password variables as parameters
+      this.login({ email: this.email, password: this.password });
     },
+      login() {
+        // Lấy thông tin đăng nhập từ data
+       
+        // Gửi yêu cầu đăng nhập đến server
+      
+      }
     },
   };
   </script>

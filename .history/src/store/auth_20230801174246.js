@@ -48,7 +48,7 @@ const getters = {
        
       logout({ commit }) {
         localStorage.removeItem('token');
-          commit('SET_AUTHENTICATED', localStorage.getItem('token'));
+          // commit('SET_AUTHENTICATED', localStorage.getItem('token'));
           alert('đăng xuất thành  công');
         },
 

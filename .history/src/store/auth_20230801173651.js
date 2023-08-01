@@ -1,5 +1,5 @@
 const state = {
-  isAuthenticated: localStorage.getItem('token'),
+  isAuthenticated: localStorage.getItem(token),
   
   // Các thông tin người dùng khác nếu cần
 };
@@ -26,7 +26,7 @@ const getters = {
     .then(response => {
       const data = response.data;
       localStorage.setItem('token', data.access_token);
-      commit('SET_AUTHENTICATED', localStorage.getItem('token'))
+      commit('SET_AUTHENTICATED', true)
      
       alert('Đăng nhập thành công');
       
@@ -48,7 +48,7 @@ const getters = {
        
       logout({ commit }) {
         localStorage.removeItem('token');
-          commit('SET_AUTHENTICATED', localStorage.getItem('token'));
+          commit('SET_AUTHENTICATED', false);
           alert('đăng xuất thành  công');
         },
 
