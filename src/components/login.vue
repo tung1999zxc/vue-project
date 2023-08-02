@@ -1,5 +1,5 @@
 <template>
-  <div  id="app" class="container mt-5 ">
+  <div  id="app" class="container mt-5 bg-light">
     
     
       <!-- <div  class="row justify-content-center  ">

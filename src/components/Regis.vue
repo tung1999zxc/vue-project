@@ -3,10 +3,10 @@
    <!-- <div  class="row justify-content-center  ">
     <div class="col"> -->
        <h1>Trang đăng kí</h1>
-       <div class="input-group">
+       <!-- <div class="input-group">
            <label for="username">Email</label>
            <input v-model="email" type="text" id="username" placeholder="Tên đăng nhập">
-       </div> 
+       </div>  -->
        <div class="input-group">
            <label for="username">Tên đăng nhập</label>
            <input v-model="username" type="text" id="username" placeholder="Tên đăng nhập">
@@ -15,12 +15,12 @@
          <label for="password">Mật khẩu</label>
          <input v-model="password" type="password" id="password" placeholder="Mật khẩu">
         </div>
-        <div class="input-group">
+        <!-- <div class="input-group">
             <label for="username">Nhập lại mật khẩu</label>
             <input v-model="rePassword" type="text" id="username" placeholder="Tên đăng nhập">
-        </div> 
-       <button class="login-btn mb-2" @click="login">Đăng nhập</button> 
-       
+        </div>  -->
+       <button class="login-btn mb-2" @click="regis">Đăng Kí</button> 
+      
     </div>
     <!-- </div>
    </div> -->
@@ -33,31 +33,37 @@
   export default {
     data() {
       return {
-        username: "",
-        password: "",
-        email:"",
-        rePassword:"",
+        // data1 : {},
+        username: "haitv",
+        password: "123456",
+        // email:"",
+        // rePassword:"",
 
       };
     },
     methods: {
-      login() {
+      regis() {
         // Lấy thông tin đăng nhập từ data
         const username = this.username;
         const password = this.password;
-        const email = this.email;
-        const rePassword = this.rePassword;
+        // const email = this.email;
+        // const rePassword = this.rePassword;
   
         // Gửi yêu cầu đăng nhập đến server
         axios.post('https://api.tranhai.net/api/auth/login', {
           username: username,
           password: password,
-          email: email,
-          rePassword: rePassword
+          // email: email,
+          // rePassword: rePassword
         })
         .then(response => {
           const data = response.data;
-          alert('Đăng kí thành công');
+          alert('Đăng kí thành công, chuyển đến trang đăng nhập');
+          // this.data1 = data;
+          this.$router.push('/login')
+          
+
+
           // console.log(data)  
           // this.token = data.access_token; 
         })
