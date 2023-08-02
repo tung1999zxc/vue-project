@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang đăng nhập</title>
+   
+        
+</head>
+
+<body>
+    
+  <div>
+    <div class="justify-content-between d-flex px-5 pt-1 " style="background: #aab3c4; ">
+    
+      <div class="h3"><router-link to="/">Home</router-link></div>
+      <div class="btn bg-p"><div v-if="!isAuthenticated" class="" >
+        <router-link to="/Login">Đăng nhập</router-link></div>
+       <div v-else class="btn btn-danger" >
+        <div @click="handleLogout">Đăng xuất</div></div>
+       <div v-show="!isAuthenticated"><router-link to="/Regis">Đăng Kí</router-link></div></div>
+   
+  </div>
+ 
+  </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+         new Vue({
+            el: '#app',
+            data: {
+               
+                
+            },
+            methods: {
+                
+                }
+            
+        });
+    </script>
+</body>
+
+
+</html>
