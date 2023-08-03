@@ -19,7 +19,7 @@
   import { mapState, mapGetters , mapMutations ,mapActions} from 'vuex';
   export default {
     computed: {
-    ...mapGetters('auth', ['isAuthenticated','userinfo']),
+    ...mapGetters('auth', ['isAuthenticated']),
   },
     methods: {
       ...mapMutations('auth', ['SET_AUTHENTICATED']),

@@ -1,5 +1,5 @@
 const state = {
-  isAuthenticated: localStorage.getItem('token'),
+  isAuthenticated: JSON.parse(localStorage.getItem('token')),
   userinfo: JSON.parse(localStorage.getItem('userinfo')),
   
   // Các thông tin người dùng khác nếu cần
@@ -43,7 +43,9 @@ const getters = {
         )
       .then(response=>{
         localStorage.setItem('userinfo', JSON.stringify(response.data));
+        // const userData = JSON.parse(localStorage.getItem(userinfo));
         
+        // commit('SET_USERINFO', userData);
       })
       .catch(error =>{
         alert('lấy thông tin thất bại');

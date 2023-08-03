@@ -1,6 +1,6 @@
 const state = {
   isAuthenticated: localStorage.getItem('token'),
-  userinfo: JSON.parse(localStorage.getItem('userinfo')),
+  userinfo:{'id':1},
   
   // Các thông tin người dùng khác nếu cần
 };
@@ -17,7 +17,6 @@ const getters = {
     },
     SET_USERINFO(state, value) {
       state.userinfo = value;
-      
     },
     // Các mutations khác nếu cần
   };
@@ -35,19 +34,19 @@ const getters = {
       localStorage.setItem('token', data.access_token);
       commit('SET_AUTHENTICATED', localStorage.getItem('token'));
 
-      axios.get('https://api.tranhai.net/api/userinfo/me'
-      // {
-      //   headers: {
-      //     Authorization: 'Bearer ' + localStorage.getItem('token'), 
-      //   }}
-        )
+      axios.get('https://api.tranhai.net/api/userinfo/me',
+      {
+        headers: {
+          Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiJkNzFmODc5Yy05OGQ4LTQ3M2UtYTFkZS1lNGI1NWViOGQzNWIiLCJuYW1laWQiOiJoYWl0diIsImVtYWlsIjoidHV5ZXRkZW4wOUBnbWFpbC5jb20iLCJyb2xlIjoiY2RkMzY4MTEtZGNkMS00YzgyLWI3NTktOTMwZmYxYzZhOTJiIiwibmJmIjoxNjkxMDMzNTQzLCJleHAiOjE2OTE2MzgzNDMsImlhdCI6MTY5MTAzMzU0M30.9gER5y7YeeglUx6isFOZ9DP2z867A0A-lSCakdoxSlQ', // Gửi token của người dùng để xác thực yêu cầu
+        }})
       .then(response=>{
-        localStorage.setItem('userinfo', JSON.stringify(response.data));
-        
+        commit('SET_USERINFO', response.data);
+        alert(userinfo);
       })
       .catch(error =>{
         alert('lấy thông tin thất bại');
       })
+      
 
       // console.log(data)  
       // this.token = data.access_token; 
@@ -60,17 +59,27 @@ const getters = {
       
     });
 
-    // 
-    //   
+    // if (isAuthenticated){
+    //   axios.get('https://api.tranhai.net/api/userinfo/me',
+    //   {
+    //     headers: {
+    //       Authorization: 'Bearer ' + eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiJkNzFmODc5Yy05OGQ4LTQ3M2UtYTFkZS1lNGI1NWViOGQzNWIiLCJuYW1laWQiOiJoYWl0diIsImVtYWlsIjoidHV5ZXRkZW4wOUBnbWFpbC5jb20iLCJyb2xlIjoiY2RkMzY4MTEtZGNkMS00YzgyLWI3NTktOTMwZmYxYzZhOTJiIiwibmJmIjoxNjkxMDMzNTQzLCJleHAiOjE2OTE2MzgzNDMsImlhdCI6MTY5MTAzMzU0M30.9gER5y7YeeglUx6isFOZ9DP2z867A0A-lSCakdoxSlQ, // Gửi token của người dùng để xác thực yêu cầu
+    //     }})
+    //   .then(response=>{
+    //     commit('SET_USERINFO', response.data);
+    //     alert(userinfo);
+    //   })
+    //   .catch(error =>{
+    //     alert('lấy thông tin thất bại');
+    //   })
+    // }
 
         },
 
        
       logout({ commit }) {
         localStorage.removeItem('token');
-        localStorage.removeItem('userinfo');
           commit('SET_AUTHENTICATED', localStorage.getItem('token'));
-          commit('SET_USERINFO', {});
           alert('đăng xuất thành  công');
         },
 

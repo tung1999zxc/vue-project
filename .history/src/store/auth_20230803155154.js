@@ -1,6 +1,6 @@
 const state = {
-  isAuthenticated: localStorage.getItem('token'),
-  userinfo: JSON.parse(localStorage.getItem('userinfo')),
+  isAuthenticated: JSON.parse(localStorage.getItem(token)),
+  userinfo:  {},
   
   // Các thông tin người dùng khác nếu cần
 };
@@ -22,6 +22,7 @@ const getters = {
     // Các mutations khác nếu cần
   };
   import axios from 'axios';
+import { json } from 'stream/consumers';
   import router from '../router/index'; 
   const actions = {
     login({ commit }, { username, password }) {
@@ -42,8 +43,11 @@ const getters = {
       //   }}
         )
       .then(response=>{
+        debugger
         localStorage.setItem('userinfo', JSON.stringify(response.data));
-        
+        const userData = JSON.parse(localStorage.getItem(userinfo));
+        console.log(userData);
+        // commit('SET_USERINFO', userdata);
       })
       .catch(error =>{
         alert('lấy thông tin thất bại');
@@ -68,7 +72,6 @@ const getters = {
        
       logout({ commit }) {
         localStorage.removeItem('token');
-        localStorage.removeItem('userinfo');
           commit('SET_AUTHENTICATED', localStorage.getItem('token'));
           commit('SET_USERINFO', {});
           alert('đăng xuất thành  công');

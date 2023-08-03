@@ -12,10 +12,10 @@ import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.css'
 
-// const isAuthenticated = localStorage.getItem('token');
-// if (isAuthenticated !== null) {
-//   store.commit('SET_AUTHENTICATION', isAuthenticated === 'true');
-// }
+const isAuthenticated = localStorage.getItem('isAuthenticated');
+if (isAuthenticated !== null) {
+  store.commit('SET_AUTHENTICATION', isAuthenticated === 'true');
+}
 
 const app = createApp(App)
 app.use(createPinia())

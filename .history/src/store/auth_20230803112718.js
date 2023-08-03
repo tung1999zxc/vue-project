@@ -1,6 +1,6 @@
 const state = {
   isAuthenticated: localStorage.getItem('token'),
-  userinfo: JSON.parse(localStorage.getItem('userinfo')),
+  userinfo:[],
   
   // Các thông tin người dùng khác nếu cần
 };
@@ -17,7 +17,6 @@ const getters = {
     },
     SET_USERINFO(state, value) {
       state.userinfo = value;
-      
     },
     // Các mutations khác nếu cần
   };
@@ -35,19 +34,32 @@ const getters = {
       localStorage.setItem('token', data.access_token);
       commit('SET_AUTHENTICATED', localStorage.getItem('token'));
 
-      axios.get('https://api.tranhai.net/api/userinfo/me'
-      // {
-      //   headers: {
-      //     Authorization: 'Bearer ' + localStorage.getItem('token'), 
-      //   }}
-        )
-      .then(response=>{
-        localStorage.setItem('userinfo', JSON.stringify(response.data));
+      // axios.get('https://reqres.in/api/users?page=2&id=1')
+      // // {
+      // //   headers: {
+      // //     Authorization: 'Bearer' + localStorage.getItem('token'), // Gửi token của người dùng để xác thực yêu cầu
+      // //   }})
+      // .then(response=>{
+      //   commit('SET_USERINFO', response.data.data);
         
+      // })
+      // .catch(error =>{
+      //   alert('lấy thông tin thất bại');
+      // })
+
+      axios.get('https://api.tranhai.net/api/userinfo/me',
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'), 
+        }})
+      .then(response=>{
+        commit('SET_USERINFO', response.data);
       })
       .catch(error =>{
         alert('lấy thông tin thất bại');
       })
+    
+      
 
       // console.log(data)  
       // this.token = data.access_token; 
@@ -68,9 +80,8 @@ const getters = {
        
       logout({ commit }) {
         localStorage.removeItem('token');
-        localStorage.removeItem('userinfo');
           commit('SET_AUTHENTICATED', localStorage.getItem('token'));
-          commit('SET_USERINFO', {});
+          commit('SET_USERINFO', []);
           alert('đăng xuất thành  công');
         },
 

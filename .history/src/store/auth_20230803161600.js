@@ -42,8 +42,11 @@ const getters = {
       //   }}
         )
       .then(response=>{
-        localStorage.setItem('userinfo', JSON.stringify(response.data));
         
+        localStorage.setItem('userinfo', JSON.stringify(response.data));
+        // const userData = JSON.parse(localStorage.getItem(userinfo));
+        
+        // commit('SET_USERINFO', userData);
       })
       .catch(error =>{
         alert('lấy thông tin thất bại');

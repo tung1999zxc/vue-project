@@ -1,6 +1,6 @@
 const state = {
   isAuthenticated: localStorage.getItem('token'),
-  userinfo: JSON.parse(localStorage.getItem('userinfo')),
+  userinfo:  {},
   
   // Các thông tin người dùng khác nếu cần
 };
@@ -43,7 +43,8 @@ const getters = {
         )
       .then(response=>{
         localStorage.setItem('userinfo', JSON.stringify(response.data));
-        
+        const userdata = JSON.parse(userinfo);
+        commit('SET_USERINFO', userdata);
       })
       .catch(error =>{
         alert('lấy thông tin thất bại');
@@ -68,7 +69,6 @@ const getters = {
        
       logout({ commit }) {
         localStorage.removeItem('token');
-        localStorage.removeItem('userinfo');
           commit('SET_AUTHENTICATED', localStorage.getItem('token'));
           commit('SET_USERINFO', {});
           alert('đăng xuất thành  công');

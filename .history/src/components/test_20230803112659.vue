@@ -5,13 +5,15 @@
        
         <div class="col-6 m-5">
         
-            <h1 class=" mb-5 text-center" v-if="isAuthenticated">Xin chào! {{this.userinfo.fullname}}</h1>
+            <h1 class=" mb-5 text-center" v-if="isAuthenticated">Xin chào {{userinfo.fullname}}</h1>
             <h1 class=" mb-5 text-center" v-else>Generate more leads with a professional landing page!</h1>
               <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
                 <!-- Email address input-->
                 <div class="row">
                     <div class="col">
                         <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
                     </div>
                     <div class="col-auto"><button class="btn btn-primary btn-lg q" id="submitButton" type="submit">Submit</button></div>
                 </div>

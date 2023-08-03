@@ -3,6 +3,7 @@
       <div class="justify-content-between d-flex px-5 py-3 " style="background: #aab3c4; ">
       
         <div class="h3"><router-link class="text-white text-decoration-none" to="/">Home</router-link></div>
+        <!-- <div v-show="isAuthenticated"><h3>Xin chào {{userinfor.first_name}}</h3></div> -->
         <div class=""><div v-if="!isAuthenticated" class="btn btn-primary mr-2 " >
           <router-link class="text-dark h5 text-decoration-none " to="/Login">Đăng nhập</router-link></div>
          <div v-else class="btn btn-danger " >
