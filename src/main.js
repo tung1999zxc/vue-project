@@ -21,6 +21,6 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(store)
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`; 
 app.mount('#app')
 

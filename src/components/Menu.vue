@@ -2,7 +2,11 @@
     <div>
       <div class="justify-content-between d-flex px-5 py-3 " style="background: #aab3c4; ">
       
+        
         <div class="h3"><router-link class="text-white text-decoration-none" to="/">Home</router-link></div>
+        <div class="h4 mt-1"><router-link class="text-white text-decoration-none" to="/crud">CRUD</router-link></div>
+        
+        
         <div class=""><div v-if="!isAuthenticated" class="btn btn-primary mr-2 " >
           <router-link class="text-dark h5 text-decoration-none " to="/Login">Đăng nhập</router-link></div>
          <div v-else class="btn btn-danger " >
