@@ -50,25 +50,20 @@
               <br>
               
               <label for="Description">Description</label>
-              <input class="form-control" type="text" id="Description" v-model="editUser.Description" v-if="editUser.Id" required>
+              <input class="form-control " type="text" id="Description" v-model="editUser.Description" v-if="editUser.Id" required>
               <input class="form-control" type="text" id="Description" v-model="newUser.Description"   v-else required>
               <br>
               <label for="Website">Website</label>
               <input class="form-control" type="text" id="Website" v-model="editUser.Website" v-if="editUser.Id" required>
               <input class="form-control" type="text" id="Website" v-model="newUser.Website" v-else  required>
               <br>
-              <button class="btn-block bg-success" type="submit">{{editUser.Id ? 'Lưu' : 'Thêm User'}}</button>
+              <button class="btn-block bg-success " type="submit">{{editUser.Id ? 'Lưu' : 'Thêm User'}}</button>
               
             
             </form>
           </div>
         </div> 
-    
-   
-   
-   
-   
-   
+ 
   </div>
   </template>
   
@@ -154,6 +149,10 @@
         .catch(error => {
           console.error('Lỗi khi thêm user:', error);
         });
+       
+          
+     
+        
     },
     _editUser(User) {
       this.editUser.Id = User.Id;
@@ -172,7 +171,7 @@
             Name: '',
             Slug: '',
             description: '',
-            description: '',
+            
           };
         })
         .catch(error => { 

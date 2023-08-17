@@ -24,11 +24,9 @@
 // import "@/font-awesome/css/font-awesome.css";
 
 export default {
-      data() {
-        return {
-         
-        };
-      },
+      setup(){
+        
+      }
     };
 </script>
 <style >
