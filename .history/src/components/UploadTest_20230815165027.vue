@@ -1,0 +1,362 @@
+<template>
+  <div class="todo-list">
+    <h2>Todo List</h2>
+   <div class="row justify-content-around">
+    <div class="col-5">
+      <table class="table table-striped    ">
+        <thead>
+          <tr>
+          <td> Time </td>
+          <td> Todo </td>
+          <td> chức năng </td>
+          </tr>
+        </thead>
+        <tr v-for="(todo,index) in todos" :key="index">
+          <td><p>{{ todo.id }}</p></td>
+          <td class=""><p class="text-danger">{{ todo.title }}</p></td>
+          <td> <button @click="handleEdit(todo,index)">Edit</button>
+          <button @click="handleDelete(index)">Delete</button>
+         <button @click="handleCompeleted(todo,index)">Hoàn thành</button></td>
+        </tr>
+        
+      </table>
+      <div class="form">
+        <input v-model="newTodoTitle" placeholder="Enter todo title" />
+        <button v-if="editTodo" @click="handleSave">Save</button>
+        <button @click="addTodo">Add Todo</button>
+      </div>
+    </div>
+    <div class="col-5">
+      <table class="table ">
+        <thead>
+          <tr>
+          <td> Time </td>
+          <td> Time </td>
+          <td> Todo </td>
+          <td> chức năng </td>
+          </tr>
+        </thead>
+        <tr v-for="(todo,index) in reversedTodosComp" :key="index">
+          <td><p>{{ todo.id }}<br>{{todo.timeEnd}}</p></td>
+          <td><p>{{ todo.minutes}}</p></td>
+          <td class=""><p class="text-danger">{{ todo.title }}</p></td>
+          <td> <button @click="handleDeleteComp(index)">Delete</button></td>
+        </tr>
+        
+      </table>
+    </div>
+   </div>
+
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref , onMounted , computed} from 'vue';
+import { format,differenceInMinutes } from 'date-fns';
+interface Todo {
+  id : any ;
+  title : string;
+  timeEnd? : any;
+  minutes? :any;
+}
+
+
+
+const todos = ref<Todo[]>([]);
+const todosCompeleted = ref<Todo[]>([]);
+
+const newTodoTitle = ref<string>('');
+const editTodo = ref <Todo | null>(null);
+const edittingIndex = ref<number>();
+
+
+const addTodo = () => {
+  if (newTodoTitle.value.trim() !== '') {
+    const timestamp = Date.now(); // Hoặc new Date().getTime()
+    const formattedDate = format(timestamp, 'dd/MM/yyyy HH:mm:ss');
+    todos.value.push({ id: formattedDate, title: newTodoTitle.value });
+    newTodoTitle.value = '';
+  }
+  saveDataToLacal();
+};
+
+ const handleEdit = (todo: Todo, index) => {
+    edittingIndex.value = index;
+    editTodo.value = { ...todo};
+    newTodoTitle.value = editTodo.value.title;
+    
+
+ }
+ const handleSave = () =>{
+   editTodo.value.title = newTodoTitle.value;
+   todos.value[edittingIndex.value] = editTodo.value ;
+   newTodoTitle.value= "";
+   editTodo.value= null;
+   saveDataToLacal();
+ }
+ 
+const handleDelete = (index: number) => {
+  const confirmDelete = window.confirm('Bạn có chắc muốn xóa mục này?');
+  if (confirmDelete) {
+    // const index = todos.value.findIndex(todo =>todo.id === todoId);
+    todos.value.splice(index, 1);
+    saveDataToLacal();
+  };}
+
+  const handleDeleteComp = (index) => {  
+    const confirmDelete = window.confirm('Bạn có chắc muốn xóa mục này?');
+    if (confirmDelete) {
+      todosCompeleted.value.splice(index,1);
+     saveDataToLacal();
+  };}
+  
+  const handleCompeleted = (todo: Todo , index: number ) => {
+    const timestamp = Date.now();
+    const formattedDate = format(timestamp, 'dd/MM/yyyy HH:mm:ss');
+    todo.timeEnd = formattedDate;
+    const minutes = differenceInMinutes(todo.id, formattedDate) % 60;
+    // const minutes = differenceInMinutes(todo.id, formattedDate) % 60;
+//     const startTime = new Date('2023-07-01T00:00:00');
+
+// // Mốc thời gian 2
+// const endTime = new Date('2023-07-28T00:00:00');
+
+// // Tính khoảng thời gian theo các đơn vị khác nhau
+// const days = differenceInMinutes(endTime, startTime);
+    alert(minutes);
+    todo.minutes = minutes;
+    const todoComp = {...todo};
+    todosCompeleted.value.push(todoComp);
+    todos.value.splice(index,1);
+    saveDataToLacal();
+    
+    
+  }
+
+  const reversedTodosComp = computed(() => {
+      return todosCompeleted.value.slice().reverse();
+    });
+  
+ const saveDataToLacal = (params) => {
+  localStorage.setItem('todos' , JSON.stringify( todos.value));
+  localStorage.setItem('todosComp' , JSON.stringify(todosCompeleted.value));
+
+  
+ }
+ 
+   onMounted(() => {
+    const saveTodos = localStorage.getItem('todos');
+    const saveTodos2 = localStorage.getItem('todosComp');
+    if (saveTodos || saveTodos2){
+      todos.value = JSON.parse(saveTodos);
+      todosCompeleted.value = JSON.parse(saveTodos2);
+    }
+   })
+</script>
+
+<!-- <template>
+  <div>
+    <h2>Name List</h2>
+    
+   <div class="row">
+   <div class="col-8">
+    <ul>
+      <li v-for="(todo,index) in todos" :key="index">{{todo}}
+        <button @click="handleDelete(index)">xoá</button>
+        <button @click="handleEdit(index,todo)">sửa</button>
+      </li>
+    </ul>
+   </div>
+   <div class="col-4">
+    <input v-model="newName" @keyup.enter="addName" placeholder="Enter a name" />
+    <button @click="addName">Add Name</button>
+    <button v-show="isEdit" @click="handleUpdate">Save</button>
+   </div>
+   </div>
+    
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref ,onMounted } from 'vue';
+
+const isEdit =ref(false);
+interface Todo {
+  Name: string;
+  Time: "1h";
+}
+
+const todos = ref<Todo[]>([]);
+const newName = ref<Todo>(
+  
+);
+const edittingItem = ref();
+
+const addName = () => {
+    
+    todos.value.push(newName.value);
+    newName.value.Name = '';
+    // localStorage.setItem('todos', JSON.stringify(todos.value));
+
+ 
+};
+
+const handleDelete = (index) => {
+  isEdit.value= true;
+  todos.value.splice(index,1);
+  
+}
+const handleEdit = (index,name) => {
+  edittingItem.value = index;
+  newName.value = name;
+  isEdit.value = true;
+  
+}
+const handleUpdate = () => {
+  todos.value[edittingItem.value] = newName.value;
+  newName.value = ""
+  isEdit.value= false;
+  // localStorage.setItem('todos', JSON.stringify(todos.value));
+
+}
+
+onMounted(()=> 
+{
+  const savedTosos = localStorage.getItem('todos');
+  if (savedTosos) {
+    todos.value = JSON.parse(savedTosos);
+
+  }
+})
+
+
+
+
+</script> -->
+
+
+<!-- <template>
+  <div>
+    <p>Prop value: {{ propValue }}</p>
+    <p>Reactive variable: {{ reactiveVar }}</p>
+  </div>
+</template>
+
+<script setup>
+import { defineProps, defineEmits, ref } from 'vue';
+
+const props = defineProps(['propValue']);
+const { emit } = defineEmits();
+const reactiveVar = ref(0);
+</script> -->
+
+
+<!-- 
+<template>
+  <div>
+    <p>Original value: {{ value }}</p>
+    <p>Doubled value: {{ doubledValue }}</p>
+    <button @click="chanceNumber"> Button </button>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue';
+import { Todo } from '@/types';
+
+const value = ref(5);
+const doubledValue = computed(() => value.value * 2);
+const chanceNumber = (params) => {
+   value.value += 5;
+}
+</script> -->
+
+<!-- <template>
+  <div>
+    <input v-model="phoneNumber" placeholder="Số điện thoại" @input="validatePhoneNumber" />
+    <p v-if="phoneNumberError">{{ phoneNumberError }}</p>
+
+    <form action="" @submit.prevent="âs">
+    <input v-model="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" /> <br>
+    <input v-model="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+  <button type="submit">gửi đi</button></form>
+    
+ 
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      phoneNumber: '',
+      phoneNumberError: '',
+    };
+  },
+  methods: {
+    validatePhoneNumber() {
+      if (!/^\d{10}$/.test(this.phoneNumber)) {
+        this.phoneNumberError = 'Số điện thoại không hợp lệ';
+      } else {
+        this.phoneNumberError = '';
+      }
+    },
+  },
+};
+</script> -->
+
+
+<!-- <template>
+  <div>
+    <input type="file" ref="fileInput" @change="handleFileChange" />
+    <button @click="uploadFile">Tải lên</button> <br><br>
+    tải lên nhiều file <br>
+    <input type="file" ref="fileInput" @change="handleFileChange" multiple />
+    <button @click="uploadFiles">Tải lên</button>
+    
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      selectedFile: null,
+    };
+  },
+  methods: {
+    handleFileChange(event) {
+      this.selectedFile = event.target.files[0];
+      // this.selectedFiles = event.target.files;
+    },
+    async uploadFile() {
+      if (this.selectedFile) {
+        const formData = new FormData();
+        formData.append('file', this.selectedFile);
+
+      //   const formData = new FormData();
+      //   for (let i = 0; i < this.selectedFiles.length; i++) {
+      //   formData.append('files', this.selectedFiles[i]);
+      // }
+
+        try {
+          const response = await fetch('https://example.com/api/upload', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (response.ok) {
+            console.log('Tải tệp lên thành công.');
+          } else {
+            console.error('Lỗi khi tải tệp lên.');
+          }
+        } catch (error) {
+          console.error('Lỗi kết nối:', error);
+        }
+      } else {
+        console.warn('Vui lòng chọn tệp cần tải lên.');
+      }
+    },
+  },
+};
+</script> -->
