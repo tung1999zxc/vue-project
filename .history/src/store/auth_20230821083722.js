@@ -43,8 +43,8 @@ const getters = {
     },
     // Các mutations khác nếu cần
   };
-  // import axios from 'axios';
-  
+  import axios from 'axios';
+  import router from '../router/index'; 
   const actions = {
     login( { username, password }) {
     

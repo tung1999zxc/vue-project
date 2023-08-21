@@ -2,15 +2,11 @@
   
 </template>
 
-<script>
-export default {
+<script setup lang="ts">
 
-}
+
 </script>
 
-<style>
-
-</style>
 <!-- <template>
   <div>
     <h2>Name List</h2>

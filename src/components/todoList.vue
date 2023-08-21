@@ -53,10 +53,10 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from '../store/auth';
 import { ref , onMounted , computed} from 'vue';
 import { format,differenceInMinutes,parse } from 'date-fns';
 
-import { useAuthStore } from '../store/auth';
 const store = useAuthStore();
 
 
