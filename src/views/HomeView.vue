@@ -1,16 +1,28 @@
 <template>
   <div>
-    <div v-if="store.isAuthenticated"><test/><br><footer1/></div> 
+    <div v-if="isAuthenticated"><test/><br><footer1/></div> 
     <div class="text-center mt-5 h5" v-else>Vui lòng đăng nhập hoặc đăng ký để truy cập vào trang chủ.
       
     </div>
   </div>
 </template>
 
-<script setup>
+<script>
 import test from '../components/test.vue'
 import footer1  from '../components/footer1.vue'
-import { useAuthStore } from '../store/auth';
+import { mapGetters , mapMutations} from 'vuex';
 
-const store = useAuthStore();
+export default {
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated']), // Sử dụng getter isAuthenticated từ Vuex module auth
+},
+  components: {test,footer1},
+  data() {
+    return {
+    };
+  },
+ 
+  methods: {
+  }
+};
 </script>

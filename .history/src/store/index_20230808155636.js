@@ -12,9 +12,5 @@ const store = new Vuex.Store({
   },
 });
 
-store.subscribe((mutation, state) => {
-  localStorage.setItem('appState', JSON.stringify(state));
-});
-
 export default store;
 

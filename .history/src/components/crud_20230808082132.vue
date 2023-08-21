@@ -7,7 +7,7 @@
         <table class="table">
           <thead>
           <tr>
-            <td><input type="text" name="" id="" v-model="nameSearch.Name" placeholder="tìm kiếm theo tên...">
+            <td><input type="text" name="" id="" v-model="nameSearch.Name">
               <button @click="handleSearch"> tìm kiếm</button></td> 
             <td>Name</td>
             <td>Slug</td>
@@ -87,6 +87,7 @@
     },
     users: [],
     newUser: {
+      
       Name: '',
       Slug: '',
       Description: '', 
@@ -116,7 +117,7 @@
             .then(response => {
                 console.log(response.data);
                 this.users= response.data.data;
-                
+                alert('tìm kiếm thành công')
                 
             }).catch(err => {
                 console.error(err);
