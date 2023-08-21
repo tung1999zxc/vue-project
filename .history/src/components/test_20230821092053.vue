@@ -7,7 +7,6 @@
         <div class="col-6 m-5">
         
             <h1 class=" mb-5 text-center" >Xin chào! </h1>
-            <h2 class=" mb-5 text-center" >{{ fullname }} </h2>
               <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
                 <!-- Email address input-->
                 <div class="row">
@@ -181,15 +180,6 @@
     
 
     const store = useAuthStore();
-    const fullname = ref ('')
-
-
-    onMounted (()=>{
-      if (store.getUserinfo) {
-        fullname.value = store.getUserinfo.fullname;
-
-      }
-    })
     
     // const userinfo = JSON.parse(localStorage.getItem('userinfo'));
    

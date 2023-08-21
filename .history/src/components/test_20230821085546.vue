@@ -6,8 +6,8 @@
        
         <div class="col-6 m-5">
         
-            <h1 class=" mb-5 text-center" >Xin chào! </h1>
-            <h2 class=" mb-5 text-center" >{{ fullname }} </h2>
+            <h1 class=" mb-5 text-center" v-if="isAuthenticated">Xin chào! {{store.userinfo.fullname}}</h1>
+            <h1 class=" mb-5 text-center" v-else>Generate more leads with a professional landing page!</h1>
               <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
                 <!-- Email address input-->
                 <div class="row">
@@ -30,11 +30,48 @@
           </div>
          
 
+=======
+    <header class="header">
+      <div class="container-fluid p-0">
+        <div class=" row justify-content-center header-background " >
+         
+>>>>>>> parent of 421e28e (Revert "17823/1019")
+          <div class="col-6 m-5">
+          
+              <h1 class=" mb-5 text-center" v-if="store.isAuthenticated">Xin chào! </h1>
+              <h1 class=" mb-5 text-center" v-else>Generate more leads with a professional landing page!</h1>
+                <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                  <!-- Email address input-->
+                  <div class="row">
+                      <div class="col">
+                          <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                      </div>
+                      <div class="col-auto"><button class="btn btn-primary btn-lg q" id="submitButton" type="submit">Submit</button></div>
+                  </div>
+                  
+                  <div class="d-none" id="submitSuccessMessage">
+                      <div class="text-center mb-3">
+                          <div class="fw-bolder">Form submission successful!</div>
+                          <p>To activate this form, sign up at</p>
+                          <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                      </div>
+                  </div>
+                  
+                  <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+              </form>
+            </div>
 
-   
+
+        </div>
+      </div>
+  
+
+  </header>
   
  
-
+>>>>>>> parent of ea9c5a8 (17823/1019)
+=======
+>>>>>>> parent of 421e28e (Revert "17823/1019")
            
           </div>
         </div>
@@ -181,15 +218,6 @@
     
 
     const store = useAuthStore();
-    const fullname = ref ('')
-
-
-    onMounted (()=>{
-      if (store.getUserinfo) {
-        fullname.value = store.getUserinfo.fullname;
-
-      }
-    })
     
     // const userinfo = JSON.parse(localStorage.getItem('userinfo'));
    

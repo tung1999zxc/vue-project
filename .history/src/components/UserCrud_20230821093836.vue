@@ -32,29 +32,29 @@
           </table>
         </div>
         <div class="col-2">
-          <h1 v-if="editUser">Chỉnh sửa user</h1>
+          <h1 v-if="editUser.Id">Chỉnh sửa user</h1>
           <h1 v-else>Thêm user mới</h1>
-          <form @submit.prevent="editUser ? updateUser() : addNewUser()">
+          <form @submit.prevent="editUser.Id ? updateUser() : addNewUser()">
             <label for="Name">Name</label>
-            <input class="form-control " type="text" id="Name" v-model="editUser.Name" v-if="editUser" required>
+            <input class="form-control " type="text" id="Name" v-model="editUser.Name" v-if="editUser.Id" required>
             <input class="form-control " type="text" id="Name" v-model="newUser.Name" v-else required>
             <br>
             <label for="Slug">Slug</label>
-            <input class="form-control " type="text" id="Slug" v-model="editUser.Slug" v-if="editUser" required>
+            <input class="form-control " type="text" id="Slug" v-model="editUser.Slug" v-if="editUser.Id" required>
             <input class="form-control " type="text" id="Slug" v-model="newUser.Slug" v-else required>
             
             <br>
             
             <label for="Description">Description</label>
-            <input class="form-control " type="text" id="Description" v-model="editUser.Description" v-if="editUser" required>
+            <input class="form-control " type="text" id="Description" v-model="editUser.Description" v-if="editUser.Id" required>
             <input class="form-control" type="text" id="Description" v-model="newUser.Description"   v-else required>
             <br>
             <label for="Website">Website</label>
-            <input class="form-control" type="text" id="Website" v-model="editUser.Website" v-if="editUser" required>
+            <input class="form-control" type="text" id="Website" v-model="editUser.Website" v-if="editUser.Id" required>
             <input class="form-control" type="text" id="Website" v-model="newUser.Website" v-else  required>
             <br>
             <button class="btn-block bg-success" type="submit">
-              {{ editUser ? 'Lưu' : 'Thêm User' }}
+              {{ editUser.Id ? 'Lưu' : 'Thêm User' }}
             </button>
           </form>
         </div>
@@ -128,7 +128,7 @@ interface User {
 
     const _editUser = (user: User) => {
       editUser.value = {...user}
-
+      
       
     };
 

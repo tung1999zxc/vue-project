@@ -9,13 +9,8 @@ export const useAuthStore = defineStore('auth', {
     userinfo: JSON.parse(localStorage.getItem('userinfo')),
   }),
 
- getters :{
-     
-    getIsAuthenticated : (state) => state.isAuthenticated,
-    getUserinfo : (state) => state.userinfo,
 
- },
-  actions : {
+  actions: {
 
     onIsAuthenticated (data){
       this.isAuthenticated = data;
@@ -38,7 +33,7 @@ export const useAuthStore = defineStore('auth', {
 
         try {
             const userInfoResponse = await axios.get('https://api.tranhai.net/api/userinfo/me');
-            await localStorage.setItem('userinfo', JSON.stringify(userInfoResponse.data));
+            localStorage.setItem('userinfo', JSON.stringify(userInfoResponse.data));
             this.onUserinfo(JSON.parse(localStorage.getItem('userinfo')) );
             console.log(this.userinfo);
           } catch (error) {

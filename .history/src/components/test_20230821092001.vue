@@ -7,7 +7,6 @@
         <div class="col-6 m-5">
         
             <h1 class=" mb-5 text-center" >Xin chào! </h1>
-            <h2 class=" mb-5 text-center" >{{ fullname }} </h2>
               <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
                 <!-- Email address input-->
                 <div class="row">
@@ -31,10 +30,24 @@
          
 
 
-   
+    <header class="header">
+      <div class="container-fluid p-0">
+        <div class=" row justify-content-center header-background " >
+         
+>>>>>>> parent of 421e28e (Revert "17823/1019")
+       
+
+
+        </div>
+      </div>
+  
+
+  </header>
   
  
-
+>>>>>>> parent of ea9c5a8 (17823/1019)
+=======
+>>>>>>> parent of 421e28e (Revert "17823/1019")
            
           </div>
         </div>
@@ -181,15 +194,6 @@
     
 
     const store = useAuthStore();
-    const fullname = ref ('')
-
-
-    onMounted (()=>{
-      if (store.getUserinfo) {
-        fullname.value = store.getUserinfo.fullname;
-
-      }
-    })
     
     // const userinfo = JSON.parse(localStorage.getItem('userinfo'));
    

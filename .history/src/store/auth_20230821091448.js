@@ -9,21 +9,24 @@ export const useAuthStore = defineStore('auth', {
     userinfo: JSON.parse(localStorage.getItem('userinfo')),
   }),
 
- getters :{
-     
-    getIsAuthenticated : (state) => state.isAuthenticated,
-    getUserinfo : (state) => state.userinfo,
+  // const getters = {
+  //   isAuthenticated: state => state.isAuthenticated,
+  //   userinfo: state => state.userinfo,
+    
+  //   // Các getters khác nếu cần
+  // };
 
- },
-  actions : {
+
+
+
+ actions : {
 
     onIsAuthenticated (data){
       this.isAuthenticated = data;
       },
     onUserinfo (data){
-        this.userinfo = data;
-
-      },
+        this.userinfo = data;},
+  
 
     async login({username,password }) {
       try {
@@ -32,20 +35,24 @@ export const useAuthStore = defineStore('auth', {
           password: password,
         });
 
+        
         const data = response.data;
         localStorage.setItem('token', data.access_token);
         this.onIsAuthenticated(localStorage.getItem('token')) ;
+       
+
 
         try {
             const userInfoResponse = await axios.get('https://api.tranhai.net/api/userinfo/me');
-            await localStorage.setItem('userinfo', JSON.stringify(userInfoResponse.data));
+            localStorage.setItem('userinfo', JSON.stringify(userInfoResponse.data));
             this.onUserinfo(JSON.parse(localStorage.getItem('userinfo')) );
             console.log(this.userinfo);
           } catch (error) {
             alert('Lấy thông tin thất bại', error);
           }
-        }
 
+        }
+ 
      catch (error) {
       console.log(username,password);
         console.error(error);
@@ -62,3 +69,19 @@ export const useAuthStore = defineStore('auth', {
     },
   },
 });
+
+
+   
+
+
+
+  
+  
+  export default {
+    namespaced: true,
+    state,
+  
+    actions,
+    getters,
+  };
+

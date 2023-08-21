@@ -113,7 +113,7 @@ interface User {
   
       const addNewUser = async () => {
       try {
-        const response = await axios.post('https://api.tranhai.net/api/manufacturer', newUser.value);
+        const response = await axios.put('https://api.tranhai.net/api/manufacturer', newUser.value);
         getUsers();
         alert('Thêm thành công');
         // Reset form
